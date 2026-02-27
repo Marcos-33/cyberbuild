@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Iniciar sesión</title>
+    <link rel="stylesheet" href="css.css">
+    <link rel="icon" href="media/logo.PNG">
+    <meta name="robots" content="noindex">
+</head>
+<body>
+    <main class="page">
+        <section class="auth-wrapper">
+            <form method="POST" action="login.php" class="login" aria-labelledby="login-title">
+                <div class="auth-header">
+                    <div>
+                        <h1 id="login-title">Bienvenido</h1>
+                        <p class="muted">Accede a tu cuenta para continuar</p>
+                    </div>
+                </div>
+
+                <label class="sr-only" for="dni">DNI</label><br>
+                <input id="dni" type="text" name="dni" placeholder="DNI" class="write" required autocomplete="username" inputmode="numeric">
+
+                <label class="sr-only" for="contrasena">Contraseña</label>
+                <input id="contrasena" type="password" name="contrasena" placeholder="Contraseña" class="write" required autocomplete="current-password">
+
+                <input type="submit" value="Iniciar sesión" name="btnlogin" class="send">
+
+                <div class="login-footer">
+                    <a id="btn-recuperar" href="recuperar_simple.php">¿Olvidaste tu contraseña?</a>
+                </div>
+            </form>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2008 Página web desarrollada por Cyberbuild</p>
+    </footer>
+</body>
+</html>

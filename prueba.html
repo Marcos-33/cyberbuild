@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Prueba de HTML</title>
+    <link rel="icon" href="media/logo.PNG">
+</head>
+    <script>
+        function mostrarAlerta() {
+            alert("Hola desde JavaScript");
+        }
+    </script>
+</body> 
+<body>
+    <h1>Hola, Mundo!</h1>
+    <p>Si estas leyendo este mensaje, has escrito mal el DNI o la contraseña, o lo mas probable, el codigo no fucione, suerte!.</p>
+    <a href="index.html">Volver al login</a>
+    
+    <input type="text" id="busqueda" placeholder="Buscar nombre">
+    <button onclick="buscar()">Buscar</button>
+    <p id="resultado"></p>
+    
+    <script>
+        const buscar = () => {
+            const n = document.getElementById("busqueda").value.toLowerCase();
+            const f = Array.from(document.querySelectorAll("#tabla tr")).find(tr => 
+                tr.querySelector("td")?.textContent.toLowerCase() === n
+            );
+            document.getElementById("resultado").textContent = f ? "Encontrado: " + f.textContent : "No encontrado";
+        };
+    </script>
+    
+</html>

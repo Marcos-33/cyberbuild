@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Subir archivo</title>
+    <link rel="icon" href="media/logo.PNG">
+     <link rel="stylesheet" href="css.css">
+</head>
+<body>
+    
+    <form action="archivo.php" method="POST" enctype="multipart/form-data">
+ 
+        <div id="drop-area">
+            <p>Arrastra el archivo aquí o haz clic para subirlo</p>
+            <input type="file" name="archivo" id="fileInput" hidden> 
+        </div>
+
+        <button type="file"> Subir Archivo</button>
+
+    </form>
+
+    <!-- JavaScript-->
+     <script src="DataTransfer.js"></script>
+</body>
+</html>
