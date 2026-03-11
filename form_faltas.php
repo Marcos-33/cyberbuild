@@ -1,9 +1,10 @@
 <?php
 require "auth.php";
 requireLogin();
+timeSesion();
 
 // Conexión a la base de datos
-$conexion = mysqli_connect("192.168.14.187", "cyberbuild", "Admin1234", "faltas");
+$conexion = mysqli_connect("localhost", "cyberbuild", "Admin1234", "faltas");
 
 if($conexion->connect_errno) {
     echo "No hay conexión : (" . $conexion->connect_error . ")";
@@ -39,23 +40,19 @@ if ($currentMonth >= 9) {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sample HTML Page</title>
+    <title>Solicitar ausencia</title>
     <link rel="stylesheet" href="css.css">
     <link rel="icon" href="media/logo.PNG">
 </head>
  
 <body>
-    
     <header>
-        <h1>Solicitar ausencia</h1> 
+        <h1>Solicitar ausencia</h1>
+        <a href="main.php">
+        <img id="cpifp" src="media/logo_cpifp.png">
+        </a>
     </header>
-    <nav>
-        <ul>
-            <li class="pina"><a href="main.php">Volver al inicio</a></li>
-            <li class="pina"><a href="listaphp.php">Lista profesores</a></li> 
-            <li class="pina"><a href="conexion.php">Conexion</a></li>
-        </ul>
-    </nav>
+        <?php include "navpub.php"; ?>
     <main>
         <?php
         echo 'Bienvenido, '.htmlspecialchars($_SESSION['user']['nombre']). ' ' . htmlspecialchars($_SESSION['user']['apellido']) . '!';
@@ -68,9 +65,9 @@ if ($currentMonth >= 9) {
             <label for="modulo">Modulo</label><br>
             <input type="text" id="modulo" name="modulo"><br><br>
             -->
-            <label for="archivo">Sube tu Justificante</label>
+            <label for="archivo">Sube tu Justificante:</label><br>
             <input type="file" id="archivo" name="archivo"><br><br>
-            <label for="tarea">Subir aqui la tarea</label>
+            <label for="tarea">Subir aqui la tarea:</label><br>
             <input type="file" id="tarea" name="tarea"><br><br>
             <label for="horario">Horario</label><br>
             <select name="horario"><br>
@@ -96,7 +93,6 @@ if ($currentMonth >= 9) {
         }
         ?>
         </select><br><br>
-        <label for="horario">Selecciona el Aula</label><br><br>
             <label for="dia">Día</label><br>
             <input type="date" name="dia" required><br><br>
         <input type="submit" name="enviar" value="Enviar falta">

@@ -2,9 +2,10 @@
 
 require "auth.php";
 requireLogin();
+timeSesion();
 
 
-$conexion = mysqli_connect("192.168.14.187","cyberbuild","Admin1234","faltas");
+$conexion = mysqli_connect("localhost","cyberbuild","Admin1234","faltas");
 // Establecemos conexion con la base de datos.
 
 if (!$conexion) {
@@ -24,16 +25,11 @@ if (!$conexion) {
 <body>
     <header>
         <h1>Panel Personal</h1>
+        <a href="main.php">
+        <img id="cpifp" src="media/logo_cpifp.png">
+        </a>
     </header>
-    <nav>
-        <ul>
-            <li class="pina"><a href="main.php">Pagina principal</a></li>
-            <li class="pina"><a href="form_faltas.php">Solicitar ausencia</a></li>
-            <li class="pina"><a href="listaphp.php">Lista profesores</a></li>
-            <li class="pina"><a href="conexion.php">Conexion</a></li>
-            <li class="pina"><a href="admin_panel.php">Panel Admin</a></li>
-        </ul>
-    </nav>
+        <?php include "navpub.php"; ?>
     <main>
         <h2>Panel Personal</h2>
         <table>

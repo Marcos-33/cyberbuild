@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Inicia Sesión - Cyberbuild</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="icon" href="images/logo.PNG">
+    <meta name="robots" content="noindex">
+</head>
+<body>
+    <main class="page">
+        <section class="auth-wrapper">
+            <form method="POST" action="../controllers/AuthController.php?action=login" class="login" aria-labelledby="login-title">
+                <div class="auth-header">
+                    <div>
+                        <h1 id="login-title">Cyberbuild</h1>
+                        <p class="muted">Sistema de Gestión de Faltas</p>
+                        <p style="margin-top: 1rem; color: #666;">Accede a tu cuenta para continuar</p>
+                    </div>
+                </div>
+
+                <label class="sr-only" for="dni">DNI</label>
+                <input id="dni" type="text" name="dni" placeholder="DNI (Ej: 12345678A)" class="write" required autocomplete="username" inputmode="text">
+
+                <label class="sr-only" for="contrasena">Contraseña</label>
+                <input id="contrasena" type="password" name="contrasena" placeholder="Contraseña" class="write" required autocomplete="current-password">
+
+                <input type="submit" value="Iniciar Sesión" name="btnlogin" class="send">
+
+                <div class="login-footer">
+                    <a id="btn-recuperar" href="recuperar.html">¿Olvidaste tu contraseña?</a>
+                </div>
+            </form>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2026 Cyberbuild - Sistema de Gestión de Faltas</p>
+    </footer>
+    <script src="js/main.js"></script>
+</body>
+</html>

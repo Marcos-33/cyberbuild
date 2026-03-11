@@ -1,8 +1,9 @@
 <?php
 require "auth.php";
 requireLogin();
+timeSesion();
 
-$conexion = mysqli_connect("192.168.14.187","cyberbuild","Admin1234","faltas");
+$conexion = mysqli_connect("localhost","cyberbuild","Admin1234","faltas");
 // Establece conexion
 if (!$conexion) {
     die("Error de conexión: " . mysqli_connect_error()); 
@@ -31,19 +32,19 @@ if ($horaResult) {
 
 // consulta que devuelve dos conteos mediante subconsultas filtradas
 // cada subconsulta sólo examina las filas que interesan, sin comparar con todos los demás
-$sql = "SELECT 
-    u.dni AS dni,
-    u.nombre,
-    u.apellido,
-    -- total de ausencias donde el usuario es cubridor
+
+//$sql = "SELECT u.dni AS dni, u.nombre, u.apellido FROM ausencia a 
+//INNER JOIN usuario u ON u.dni = a.dni_usuario_cubridor COUNT(*) WHERE a.dni_usuario_cubridor =";
+$sql = "SELECT u.dni AS dni, u.nombre, u.apellido,
+--  total de ausencias donde el usuario es cubridor
     (SELECT COUNT(*) FROM ausencia a
         WHERE a.dni_usuario_cubridor = u.dni
     ) AS contador_cubridor,
-    -- de esas, las que coinciden con la hora seleccionada
+ -- de esas, las que coinciden con la hora seleccionada
     (SELECT COUNT(*) FROM ausencia a
         JOIN horario h ON a.id_horario = h.id_horario
         WHERE a.dni_usuario_cubridor = u.dni
-          AND h.id_hora = '$idHoraEscaped'
+        AND h.id_hora = '$idHoraEscaped'
     ) AS contador_hora
 FROM usuario u";
 
@@ -53,8 +54,6 @@ if ($selectedIdHora !== '') {
 } else {
     $sql .= " ORDER BY contador_cubridor DESC";
 }
-
-
 ?>
 <html lang="en">
 <head> 
@@ -65,16 +64,15 @@ if ($selectedIdHora !== '') {
     <link rel="icon" href="media/logo.PNG">
 </head> 
 <body>
+<body>
     <header>
-        <h1>Lista profesores</h1>
+        <h1>Lista de Profesores</h1>
+        <a href="main.php">
+        <img id="cpifp" src="media/logo_cpifp.png">
+        </a>
     </header>
-    <nav>
-        <ul>
-            <li class="pina"><a href="form_faltas.php">Solicitar ausencia</a></li>
-            <li class="pina"><a href="main.php">Pagina Principal</a></li>
-            <li class="pina"><a href="conexion.php">Conexion</a></li>
-        </ul>
-    </nav>
+        <?php include "navpub.php"; ?>
+    <main>
     <main>
             <input type="text" id="busqueda" placeholder="Buscar Nombre">
         

@@ -2,8 +2,9 @@
 
 require "auth.php";
 requireAdmin();
+timeSesion();
 
-$conexion = mysqli_connect("192.168.14.187","cyberbuild","Admin1234","faltas");
+$conexion = mysqli_connect("localhost","cyberbuild","Admin1234","faltas");
 
 if (!$conexion) {
     die("Conexion fallida: " . mysqli_connect_error());
@@ -15,22 +16,18 @@ if (!$conexion) {
 <head> 
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Página principal</title>
+    <title>Eliminar Usuarios</title>
     <link rel="stylesheet" href="css.css">
     <link rel="icon" href="media/logo.PNG">
 </head> 
 <body>
     <header>
-        <h1>Cyberbuild</h1>
+        <h1>Eliminar Usuarios</h1>
+        <a href="main.php">
+        <img id="cpifp" src="media/logo_cpifp.png">
+        </a>
     </header>
-    <nav>
-        <ul>
-            <li class="pina"><a href="form_faltas.php">Solicitar ausencia</a></li>
-            <li class="pina"><a href="main.php">Pagina Principal</a></li>
-            <li class="pina"><a href="conexion.php">Conexion</a></li>
-            <li class="pina"><a href="eliminar.php">Eliminar</a></li>
-            <li class="pina"><a href="crear_usuarios.php">Crear usuarios</a></li>
-        </ul>
+        <?php include "navpriv.php"; ?>
     </nav>
     <main>
         <h2>Listado de usuarios</h2>
@@ -61,7 +58,7 @@ if (!$conexion) {
             <td>{$fila['rol']}</td>
             <td>
                 <a href='?eliminar={$fila['dni']}'
-                onclick='return confirm(\"¿Eliminar usuario?\")'>Eliminar</a>
+                onclick='return confirm(\"¿Eliminar usuario?\")' id='black'>Eliminar</a>
             </td>
         </tr>";
         }

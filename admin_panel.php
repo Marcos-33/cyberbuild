@@ -1,8 +1,9 @@
 <?php 
 require "auth.php"; // Para que solo entren admins
-requireLogin();     // Comprobar que hay sesión
+requireAdmin(); // Comprobar que hay sesión
+timeSesion();    
 // Aquí creamos la conexión 
-$conexion = mysqli_connect("192.168.14.187", "cyberbuild", "Admin1234", "faltas");
+$conexion = mysqli_connect("localhost", "cyberbuild", "Admin1234", "faltas");
 
 if($conexion->connect_errno) {
     echo "No hay conexión: (" . $conexion->connect_error . ")";
@@ -21,17 +22,11 @@ if($conexion->connect_errno) {
 <body>
     <header>
         <h1>Panel de administrador</h1>
+        <a href="main.php">
+        <img id="cpifp" src="media/logo_cpifp.png">
+        </a>
     </header>
-    <nav>
-        <ul>
-            <li class="pina"><a href="form_faltas.php">Solicitar ausencia</a></li>
-            <li class="pina"><a href="main.php">Pagina Principal</a></li>
-            <li class="pina"><a href="conexion.php">Conexion</a></li>
-            <li class="pina"><a href="eliminar.php">Eliminar</a></li>
-            <li class="pina"><a href="crear_usuarios.php">Crear usuarios</a></li>
-            <li class="pina"><a href="historial.php">Historial</a></li>
-        </ul>
-    </nav> 
+        <?php include "navpriv.php"; ?>
     <main>
         <h2>Aceptar ausencia.</h2>
         <table>
@@ -50,7 +45,7 @@ if($conexion->connect_errno) {
                     FROM ausencia a 
                     LEFT JOIN usuario u ON a.dni_generador = u.dni 
                     LEFT JOIN horario h ON a.id_horario = h.id_horario
-                    WHERE a.estado = 'pendiente'";
+                    WHERE a.estado = 'Pendiente'";
             
             $resultado_ausencia = $conexion->query($sql);
 
@@ -66,14 +61,14 @@ if($conexion->connect_errno) {
                     echo '<td>';
                         echo '<form method="POST" action="estado.php" style="display:inline;">';
                             echo '<input type="hidden" name="id_a" value="' . htmlspecialchars($rowA['id_a']) . '">';
-                            echo '<button type="submit" name="accion" id="acept" value="aceptar">ACEPTAR ✅</button>';
-                            echo '<button type="submit" name="accion" id="acept" value="rechazar" class="btn-Rechazar">RECHAZAR 🚫</button>';
+                            echo '<button type="submit" name="accion" class="btn-aceptar" value="aceptar">ACEPTAR ✅</button>';
+                            echo '<button type="submit" name="accion" class="btn-aceptar" value="rechazar" class="btn-Rechazar">RECHAZAR 🚫</button>';
                         echo '</form>';
                     echo '</td>';
                     echo '</tr>';
                 }
             } else {
-                echo '<tr><td colspan="7">No hay ausencias disponibles en este momento</td></tr>';
+                echo '<tr><td colspan="7">No hay solicitudes disponibles en este momento</td></tr>';
             }
             ?>
         </table>

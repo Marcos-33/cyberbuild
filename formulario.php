@@ -1,10 +1,11 @@
 <?php 
 require "auth.php";
 requireLogin();
+timeSesion();
 
-$conexion = mysqli_connect("192.168.14.187", "cyberbuild", "Admin1234", "faltas");
+$conexion = mysqli_connect("localhost", "cyberbuild", "Admin1234", "faltas");
 
-if($conexion->connect_errno) {
+if($conexion->connect_error) {
     echo "No hay conexión : (" . $conexion->connect_error . ")";
     exit();
 }
@@ -54,7 +55,7 @@ $queryregistrar = "INSERT INTO ausencia
     VALUES ('$dia', '$rol', '$justificanteSeguro', '$hora', '$tareaSegura', '$id_horario', '$dni', 'pendiente', 'NO')";
 
     if(mysqli_query($conexion, $queryregistrar)) {
-        echo "<script>alert('Falta registrada correctamente');window.location='main.php'</script>";
+        echo "<script>alert('Falta registrada correctamente. Espere a que sea aceptada por un administrador.');window.location='main.php'</script>";
     } else {
         echo "Error en SQL: " . mysqli_error($conexion);
     }

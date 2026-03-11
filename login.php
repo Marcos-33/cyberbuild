@@ -1,5 +1,5 @@
 <?php
-$conexion = mysqli_connect("192.168.14.187","cyberbuild","Admin1234","faltas");
+$conexion = mysqli_connect("localhost","cyberbuild","Admin1234","faltas");
 //Inicia conexion con la base de datos
 //"Nombre del servidor" , "Nombre del usuario, "Contrasena", "Nombre BD"
 
@@ -30,13 +30,11 @@ if($conexion->connection_error)
             echo "<script>alert('DNI inválido');window.location='index.html'</script>";
             exit;
         }
-        // Usar prepared statements para evitar SQL Injection
-        $stmt = $conexion->prepare("SELECT nombre, apellido, dni, rol, contrasena FROM usuario WHERE dni = ?");
-        $stmt->bind_param("s", $dni);
-        $stmt->execute();
-        $resultado = $stmt->get_result();
+        // Consulta directa con valores interpolados
+        $sql = "SELECT nombre, apellido, dni, rol, contrasena FROM usuario WHERE dni = '$dni'";
+        $resultado = $conexion->query($sql);
         //Busca en la base de datos y selecciona la fila donde el dni es igual al dni ingresado por el usuario
-        $nr = $resultado->num_rows;
+        $nr = $resultado ? $resultado->num_rows : 0;
         //Cuenta el numero de filas que devuelve la consulta, si es 1, significa que el usuario existe
         
         if($nr == 1) {
@@ -56,7 +54,8 @@ if($conexion->connection_error)
                     "nombre" => $buscarpass["nombre"],
                     "apellido" => $buscarpass["apellido"], 
                     "dni" => $buscarpass["dni"],
-                    "rol" => $buscarpass["rol"] 
+                    "rol" => $buscarpass["rol"],
+                    "LAST_ACTIVITY" => $buscarpass["LAST_ACTIVITY"]
                     ];
                     //Cuando el usuario inicia sesión, se crea una sesión con su dni y rol 
                     header('Location: main.php');
@@ -71,6 +70,5 @@ if($conexion->connection_error)
         {
             echo  "<script>alert('DNI o contraseña incorrecto');window.location='index.html'</script>";
         }
-        $stmt->close();
     }
 ?>

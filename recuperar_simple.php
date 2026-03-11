@@ -11,11 +11,10 @@
 <div class="recuperar1">
     <h2 class="recuperar2">Recuperar contraseña</h2>
 
-    <form action="actualizar_simple.php" method="POST">
+    <form action="send_recovery.php" method="POST">
         <input type="text" name="dni" placeholder="DNI" class="recuperar3" required>
         <input type="email" name="gmail" placeholder="Correo" class="recuperar4" required>
-        <input type="password" name="cont" placeholder="Nueva contraseña" class="recuperar5" required>
-        <button type="submit" class="recuperar6">Actualizar contraseña</button>
+        <button type="submit" class="recuperar6">Enviar enlace de recuperación</button>
         <a href="index.html" class="recuperar7">Volver a iniciar sesión</a>
     </form>
 </div>

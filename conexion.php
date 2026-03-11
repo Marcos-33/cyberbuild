@@ -2,6 +2,7 @@
 
 require "auth.php";
 requireLogin();
+timeSesion();
 ?>
 
 <!DOCTYPE html> 
@@ -13,7 +14,10 @@ requireLogin();
             <link rel="icon" href="media/logo.PNG"> 
         </head>
         <body> 
-            <p> 
-https://prod.liveshare.vsengsaas.visualstudio.com/join?69D23A97CA67D20E62E9861EDDE5F5E89AAA            </p>  
+            <?php include "navpriv.php"; ?>
+            <p>
+https://prod.liveshare.vsengsaas.visualstudio.com/join?25C6798C76C5D733076272112555CD52E776
+https://github.com/Marcos-33/cyberbuild.git
+            </p>  
         </body>
     </html> 

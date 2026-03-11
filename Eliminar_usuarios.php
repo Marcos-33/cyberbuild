@@ -1,5 +1,5 @@
 <?php
-$conexion = mysqli_connect("192.168.14.187","cyberbuild","Admin1234","faltas");
+$conexion = mysqli_connect("localhost","cyberbuild","Admin1234","faltas");
 // Establece conexion
 if (!$conexion) {
     die("Conexion fallida: " . mysqli_connect_error());

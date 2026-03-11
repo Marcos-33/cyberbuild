@@ -1,8 +1,9 @@
 <?php
 require "auth.php";
 requireLogin();
+timeSesion();
 
-$conexion = mysqli_connect("192.168.14.187","cyberbuild","Admin1234","faltas");
+$conexion = mysqli_connect("localhost","cyberbuild","Admin1234","faltas");
 
 if (!$conexion) {
     die("Conexion fallida: " . mysqli_connect_error());
@@ -19,13 +20,9 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         die("Acción no válida.");
     }
 
-    $sql_update = "UPDATE ausencia SET aceptar = ?, dni_usuario_cubridor = ? WHERE id_a = ?";
-    $stmt_update = $conexion->prepare($sql_update);
-    $stmt_update->bind_param("ssi", $nuevo_estado, $_SESSION['user']['dni'], $id_a);
-
-    if ($stmt_update->execute()) {
-        header("Location: main.php");
-        exit();
+    $sql_update = "UPDATE ausencia SET aceptar = '$nuevo_estado', dni_usuario_cubridor = '" . $_SESSION['user']['dni'] . "' WHERE id_a = $id_a";
+    if ($conexion->query($sql_update)) {
+        echo "<script>alert('Gracias por cubrir esta ausencia. Puedes ver las guardias cubiertas anteriormente en Guardias Personales.');window.location='main.php'</script>";
     } else {
         echo "Error al actualizar el estado: " . $conexion->error;
     }

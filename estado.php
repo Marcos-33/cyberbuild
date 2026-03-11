@@ -1,5 +1,5 @@
 <?php
-$conexion = mysqli_connect("192.168.14.187","cyberbuild","Admin1234","faltas");
+$conexion = mysqli_connect("localhost","cyberbuild","Admin1234","faltas");
 // Establecemos conexion con la base de datos.
 
 if (!$conexion) {
@@ -25,14 +25,10 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     }
     // Si el valor de la accion no es ni aceptar ni rechazar, muestra un mensaje de error.
     
-    $sql_update = "UPDATE ausencia SET estado = ? WHERE id_a = ?";
+    $sql_update = "UPDATE ausencia SET estado = '$nuevo_estado' WHERE id_a = $id_a";
     // Hacemos una consulta SQL para actualizar el 'estado' en el 'id_a' correspondiente en la tabla 'ausencia'.
-    $stmt_update = $conexion->prepare($sql_update);
-    // Preparamos una consulta SQL
-    $stmt_update->bind_param("si", $nuevo_estado, $id_a);
-    // Vinculamos los parámetros a la consulta preparada. 
 
-    if ($stmt_update->execute()) {
+    if ($conexion->query($sql_update)) {
         header("Location: admin_panel.php");
         exit();
     // Si la consulta se ejecuta correctamente, redirige a 'admin_panel.php'

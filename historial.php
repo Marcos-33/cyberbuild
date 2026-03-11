@@ -1,5 +1,9 @@
 <?php
-$conexion = mysqli_connect("192.168.14.187", "cyberbuild", "Admin1234", "faltas");
+require "auth.php";
+requireAdmin();
+timeSesion();
+
+$conexion = mysqli_connect("localhost", "cyberbuild", "Admin1234", "faltas");
 
 if (!$conexion) {
     die("Error de conexión: " . mysqli_connect_error());
@@ -67,14 +71,11 @@ if (!$resultado) {
     <body>
         <header>
             <h1>Historial de Ausencias</h1>
+            <a href="main.php">
+        <img id="cpifp" src="media/logo_cpifp.png">
+        </a>
         </header>
-        <nav>
-            <ul>
-                <li class="pina"><a href="form_faltas.php">Solicitar ausencia</a></li>
-                <li class="pina"><a href="main.php">Pagina Principal</a></li>
-                <li class="pina"><a href="conexion.php">Conexion</a></li>
-            </ul>
-        </nav>
+            <?php include "navpriv.php"; ?>
         <main>
         <div class="infaño">
             <h3>Historial del Año Académico</h3>
